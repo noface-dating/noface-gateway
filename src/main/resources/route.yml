@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: core-service
+          uri: lb://DURI-CORE
+          predicates:
+            - Path=/api/**

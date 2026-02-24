@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.5'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.duri'
+version = '0.0.1-SNAPSHOT'
+description = 'duri-gateway'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven{ url 'https://repo.spring.io/release'}
+}
+
+ext {
+    set('springCloudVersion', "2024.0.3")
+}
+
+dependencies {
+    // Gateway (Reactive)
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+    // Actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
