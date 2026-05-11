@@ -6,3 +6,13 @@ spring:
           uri: lb://DURI-CORE
           predicates:
             - Path=/api/**
+
+        - id: auth-service
+          uri: lb://DURI-AUTH
+          predicates:
+            - Path=/auth/**
+
+        - id: front-service
+          uri: lb://DURI-FRONT
+          predicates:
+            - Path=/**
